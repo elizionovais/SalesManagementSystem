@@ -1,0 +1,15 @@
+﻿<h2>Delete Seller?</h2>
+
+<h3>Do you really want to delete the seller?</h3>
+
+<button type="button" class="btn btn-danger" onclick="No()">No</button>
+<button type="button" class="btn btn-danger" onclick="Yes()">Yes</button>
+
+<script>
+    function No() {
+        window.location.href = '../../Seller/DeleteSeller/' + '@ViewData["DeleteId"].ToString()';
+    }
+    function Yes() {
+        window.location.href = '../../Seller/Index';
+    }
+</script>

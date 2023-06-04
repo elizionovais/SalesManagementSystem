@@ -1,0 +1,115 @@
+﻿@model SaleModel
+<h2>Client Register</h2>
+<br />
+<form asp-controller="Sale" asp-action="Register">
+    <input type="hidden" asp-for="Id" value="@try { @ViewBag.Sale.Id} catch { } " />
+
+    <div class="form-group">
+        <label>Client</label>
+        <select asp-for="Client_Id" class="form-control">
+            @{
+                foreach (var item in (List<ClientModel>)ViewBag.ListClients)
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Seller</label>
+        <select asp-for="Seller_Id" class="form-control">
+            @{
+                foreach (var item in (List<SellerModel>)ViewBag.ListSellers)
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            }
+        </select>
+    </div>
+    <label>Product</label>
+    <br /><br />
+    <div class="form-group">
+        <div class="col-lg-9">
+            <select class="form-control" id="slt">
+                @{
+                    foreach (var item in (List<ProductModel>)ViewBag.ListProducts)
+                    {
+                        <option value="@item.Id">@item.Name | @item.Price</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-lg-1">
+            <input type="text" class="form-control" value="1" id="unit" />
+        </div>
+        <div class="col-lg-2">
+            <button type="button" class="btn btn-block btn-primary" onclick="AddProduct()">Add</button>
+        </div>
+    </div>
+
+    <br /><br />
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>Id</td>
+                <td>Name</td>
+                <td>Qtd</td>
+                <td>Price</td>
+                <td>Total</td>
+            </tr>
+        </thead>
+        <tbody id="listProducts">
+        </tbody>
+    </table>
+
+    <div style="float:left; font-size:22px;">Total: R$</div>
+    <div style="float:left; font-size:22px; margin-left:5px" id="divToal">0.00</div>
+
+      <input type="hidden" id="txtTotal" asp-for="Total" />
+
+    <br /><br />
+
+        <textarea asp-for="ListProducts" id="ListJSON" style="display:none"></textarea>
+
+    <button type="submit" class="btn btn-block btn-success">Save</button>
+</form>
+
+<script>
+    var items = new Object();
+    items.Products = new Array();
+
+    var code = document.getElementById("slt");
+    var qtd = document.getElementById("unit");
+    var listProducts = document.getElementById("listProducts");
+    var divTotal = document.getElementById("divTotal");
+    var txtTotal = document.getElementById("txtTotal");
+    var ListJSON = document.getElementById("ListJSON");
+
+    function AddProduct() {
+        var dp = code.options[code.selectedIndex].text;
+        var arrayDp = dp.split('|')
+        var total = (arrayDp[1].replace(",", ".") * qtd.value);
+
+        items.Products.push({
+            "Code": code.value,
+            "Description": arrayDp[0],
+            "Qtd": qtd.value,
+            "Price": arrayDp[1],
+            "Total": total
+        })
+
+        ListJSON.innerHTML = JSON.stringify(items.Products);
+
+        var product = "<tr>" +
+            "<td>" + code.value + "</td>" +
+            "<td>" + arrayDp[0] + "</td>" +
+            "<td>" + qtd.value + "</td>" +
+            "<td> R$" + arrayDp[1] + "</td>" +
+            "<td> R$" + total + "</td>" +
+            "</tr>";
+        listProducts.innerHTML += product;
+        divTotal.innerHTML = divTotal.innerText * 1 + total;
+        txtTotal.value = (divTotal.innerText * 1 + total).toString().replace(".",",");
+    }
+</script>

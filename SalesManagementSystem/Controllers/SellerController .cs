@@ -7,27 +7,27 @@ using System.Threading.Tasks;
 
 namespace SalesManagementSystem.Controllers
 {
-    public class ClientController : Controller
+    public class SellerController : Controller
     {
         public IActionResult Index()
         {
-            ViewBag.ListClient = new ClientModel().ListClients();
+            ViewBag.ListSeller = new SellerModel().ListSellers();
             return View();
         }
         public IActionResult Register(int? id)
         {
             if(id != null)
             {
-                ViewBag.Client = new ClientModel().GetClient(id);
+                ViewBag.Client = new SellerModel().GetSeller(id);
             }
             return View();
         }
         [HttpPost]
-        public IActionResult Register(ClientModel client)
+        public IActionResult Register(SellerModel seller)
         {
             if (ModelState.IsValid)
             {
-                client.Save();
+                seller.Save();
                 return RedirectToAction("Index");
             }
 
@@ -39,9 +39,9 @@ namespace SalesManagementSystem.Controllers
             return View();
         }
 
-        public IActionResult DeleteClient(int id)
+        public IActionResult DeleteSeller(int id)
         {
-            new ClientModel().Delete(id);
+            new SellerModel().Delete(id);
             return View();
         }
     }

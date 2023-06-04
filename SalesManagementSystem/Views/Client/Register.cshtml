@@ -2,19 +2,21 @@
 <h2>Client Register</h2>
 <br />
 <form asp-controller="Client" asp-action="Register">
+    <input type="hidden" asp-for="Id" value="@try { @ViewBag.Client.Id} catch { } "/>
+
     <div class="form-group">
         <label>Name</label>
-        <input asp-for="Name" type="text" class="form-control" />
+        <input asp-for="Name" type="text" class="form-control" value="@try { @ViewBag.Client.Name} catch { } " />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label>CPF/CNPJ</label>
-        <input asp-for="CPF" type="text" class="form-control" />
+        <input asp-for="CPF" type="text" class="form-control" value="@try { @ViewBag.Client.CPF} catch { } "/>
         <span asp-validation-for="CPF" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label>Email</label>
-        <input asp-for="Email" type="text" class="form-control" />
+        <input asp-for="Email" type="text" class="form-control" value="@try { @ViewBag.Client.Email} catch { } "/>
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
 

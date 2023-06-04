@@ -1,4 +1,4 @@
-﻿<h3>List Clients</h3>
+﻿<h3>List Sellers</h3>
 
 <table class="table table-bordered">
    <thead>
@@ -7,37 +7,35 @@
            <th>-</th>
            <th>Id</th>
            <th>Name</th>
-           <th>CPF/CNPJ</th>
            <th>Email</th>
        </tr>
    </thead>
     <tbody>
         @{ 
-            foreach(var client in (List<ClientModel>)ViewBag.ListClient)
+            foreach(var seller in (List<SellerModel>)ViewBag.ListSeller)
             {
                 <tr>
                     <td><button type="button" class="btn btn-warning" onclick="Edit()">Edit</button> </td>
                     <td><button type="button" class="btn btn-warning" onclick="Delete()">Delete</button> </td>
-                    <td>@client.Id</td>
-                    <td>@client.Name</td>
-                    <td>@client.CPF</td>
-                    <td>@client.Email</td>
+                    <td>@seller.Id</td>
+                    <td>@seller.Name</td>
+                    <td>@seller.Email</td>
                 </tr>
             }
         }
     </tbody>
 </table>
 <br />
-<button class="btn btn-block btn-primary" type="button" onclick="Register()">Register clients</button>
+<button class="btn btn-block btn-primary" type="button" onclick="Register()">Register sellers</button>
 
 <script>
     function Register() {
-        window.location.href = "../Client/Register";
+        window.location.href = "../Seller/Register";
     }
     function Edit(id) {
-        window.location.href = "../Client/Register/" + id;
+        window.location.href = "../Seller/Register/" + id;
     }
     function Delete(id) {
-        window.location.href = "../Client/Register" + id;
+        window.location.href = "../Seller/Register" + id;
     }
 </script>

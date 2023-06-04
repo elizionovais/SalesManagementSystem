@@ -1,0 +1,49 @@
+﻿<h3>List Products</h3>
+
+<table class="table table-bordered">
+   <thead>
+       <tr>
+           <th>-</th>
+           <th>-</th>
+           <th>Id</th>
+           <th>Name</th>
+           <th>Description</th>
+           <th>Price</th>
+           <th>Quantity_inStock</th>
+           <th>Unit</th>
+           <th>Image</th>
+       </tr>
+   </thead>
+    <tbody>
+        @{ 
+            foreach(var product in (List<ProductModel>)ViewBag.ListProduct)
+            {
+                <tr>
+                    <td><button type="button" class="btn btn-warning" onclick="Edit()">Edit</button> </td>
+                    <td><button type="button" class="btn btn-warning" onclick="Delete()">Delete</button> </td>
+                    <td>@product.Id</td>
+                    <td>@product.Name</td>
+                    <td>@product.Description</td>
+                    <td>@product.Price</td>
+                    <td>@product.Quantity_inStock</td>
+                    <td>@product.Unit</td>
+                    <td><img src="@product.Image" width="150" height="150" /></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<br />
+<button class="btn btn-block btn-primary" type="button" onclick="Register()">Register products</button>
+
+<script>
+    function Register() {
+        window.location.href = "../Product/Register";
+    }
+    function Edit(id) {
+        window.location.href = "../Product/Register/" + id;
+    }
+    function Delete(id) {
+        window.location.href = "../Product/Register" + id;
+    }
+</script>

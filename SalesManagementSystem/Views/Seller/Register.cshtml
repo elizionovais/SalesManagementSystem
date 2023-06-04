@@ -1,0 +1,19 @@
+﻿@model SellerModel
+<h2>Seller Register</h2>
+<br />
+<form asp-controller="Seller" asp-action="Register">
+    <input type="hidden" asp-for="Id" value="@try { @ViewBag.Seller.Id} catch { } "/>
+
+    <div class="form-group">
+        <label>Name</label>
+        <input asp-for="Name" type="text" class="form-control" value="@try { @ViewBag.Seller.Name} catch { } " />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input asp-for="Email" type="text" class="form-control" value="@try { @ViewBag.Seller.Email} catch { } "/>
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-block btn-success">Save</button>
+</form>

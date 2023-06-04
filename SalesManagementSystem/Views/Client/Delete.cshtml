@@ -1,0 +1,15 @@
+﻿<h2>Delete Client?</h2>
+
+<h3>Do you really want to delete the client?</h3>
+
+<button type="button" class="btn btn-danger" onclick="No()">No</button>
+<button type="button" class="btn btn-danger" onclick="Yes()">Yes</button>
+
+<script>
+    function No() {
+        window.location.href = '../../Client/DeleteClient/' + '@ViewData["DeleteId"].ToString()';
+    }
+    function Yes() {
+        window.location.href = '../../Client/Index';
+    }
+</script>

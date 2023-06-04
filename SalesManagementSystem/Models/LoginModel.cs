@@ -12,7 +12,7 @@ namespace SalesManagementSystem.Models
     {
         public string Id { get; set; }
 
-        public string Nome { get; set; }
+        public string Name { get; set; }
 
         [Required(ErrorMessage="Type user email")]
         [DataType(DataType.EmailAddress)]
@@ -32,7 +32,7 @@ namespace SalesManagementSystem.Models
             {
 
                 Id = dt.Rows[0]["ID"].ToString();
-                Nome = dt.Rows[0]["NAME"].ToString();
+                Name = dt.Rows[0]["NAME"].ToString();
                 return true;
             }
             else

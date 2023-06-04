@@ -19,8 +19,8 @@ namespace SalesManagementSystem.Controllers
             {
                 if (id == 0)
                 {
-                    HttpContext.Session.SetString("IdUsuarioLogado", string.Empty);
-                    HttpContext.Session.SetString("NomeUsuarioLogado", string.Empty);
+                    HttpContext.Session.SetString("IdUser", string.Empty);
+                    HttpContext.Session.SetString("NameUser", string.Empty);
                 }
             }
             //Fim
@@ -36,16 +36,20 @@ namespace SalesManagementSystem.Controllers
                 bool loginOk = login.ValidateLogin();
                 if (loginOk)
                 {
-                    HttpContext.Session.SetString("IdUsuarioLogado", login.Id);
-                    HttpContext.Session.SetString("NomeUsuarioLogado", login.Nome);
+                    HttpContext.Session.SetString("IdUser", login.Id);
+                    HttpContext.Session.SetString("NameUser", login.Name);
                     return RedirectToAction("Menu", "Home");
                 }
                 else
                 {
-                    TempData["ErrorLogin"] = "E-mail ou Senha são inválidos!";
+                    TempData["ErrorLogin"] = "Invalid Credentials!";
                 }
             }
 
+            return View();
+        }
+        public IActionResult Menu()
+        {
             return View();
         }
         public IActionResult Index()

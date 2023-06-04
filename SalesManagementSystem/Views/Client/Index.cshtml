@@ -1,0 +1,33 @@
+﻿<h3>List Clients</h3>
+
+<table class="table table-bordered">
+   <thead>
+       <tr>
+           <th>Id</th>
+           <th>Name</th>
+           <th>CPF/CNPJ</th>
+           <th>Email</th>
+       </tr>
+   </thead>
+    <tbody>
+        @{ 
+            foreach(var client in (List<ClientModel>)ViewBag.ListClient)
+            {
+                <tr>
+                    <td>@client.Id</td>
+                    <td>@client.Name</td>
+                    <td>@client.CPF</td>
+                    <td>@client.Email</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<br />
+<button class="btn btn-block btn-primary" type="button" onclick="Register()">Register clients</button>
+
+<script>
+    function Register() {
+        window.location.href = "../Client/Register"
+    }
+</script>

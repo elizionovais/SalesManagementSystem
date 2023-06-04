@@ -1,0 +1,36 @@
+﻿@model SaleModel
+<h2>Sales List</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Date</th>
+            <th>Seller</th>
+            <th>Client</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var client in (List<SaleModel>)ViewBag.ListSales)
+            {
+                <tr>
+                    <td>@client.Id</td>
+                    <td>@client.Date</td>
+                    <td>@client.Seller_Id</td>
+                    <td>@client.Client_Id</td>
+                    <td>@client.Total</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<br />
+<button class="btn btn-block btn-primary" type="button" onclick="Register()">Register sales</button>
+
+<script>
+    function Register() {
+        window.location.href = "../Client/Register";
+    }
+</script>

@@ -1,0 +1,39 @@
+﻿@model ReportModel
+<h2>Sales Report</h2>
+<br />
+<form asp-controller="Report" asp-action="Sales">
+    <div class="form-group">
+        <label>First period</label>
+        <input asp-for="FirstDate" type="date" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Final period</label>
+        <input asp-for="FinalDate" type="date" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-block btn-success">Search</button>
+</form>
+<br />
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Date</th>
+            <th>Seller</th>
+            <th>Client</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var client in (List<SaleModel>)ViewBag.ListSales)
+            {
+                <tr>
+                    <td>@client.Id</td>
+                    <td>@client.Date</td>
+                    <td>@client.Seller_Id</td>
+                    <td>@client.Client_Id</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

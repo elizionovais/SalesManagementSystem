@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using SalesManagementSystem.Models;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,18 @@ namespace SalesManagementSystem.Controllers
 {
     public class SaleController : Controller
     {
+        private HttpContextAccessor httpContextAcessor;
+
+        public SaleController(HttpContextAccessor httpContext)
+        {
+            httpContextAcessor = httpContext;
+        }
+
+        public IActionResult Index()
+        {
+            ViewBag.ListSales = new SaleModel().ListSales();
+            return View();
+        }
         public IActionResult Register()
         {
             LoadData();
@@ -17,6 +30,7 @@ namespace SalesManagementSystem.Controllers
         [HttpPost]
         public IActionResult Register(SaleModel sale)
         {
+            sale.Seller_Id = httpContextAcessor.HttpContext.Session.GetString("IdUser");
             sale.Insert();
             LoadData();
             return View();
